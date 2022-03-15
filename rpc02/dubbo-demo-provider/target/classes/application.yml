@@ -1,0 +1,32 @@
+server:
+  port: 8088
+  
+spring:
+  application:
+    name: dubbo-demo-provider
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/demo_ds_0?characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 5512853xin
+
+dubbo:
+  scan:
+    base-packages: io.kimmking.dubbo.demo.provider
+  protocol:
+    name: dubbo
+    port: 12345
+  registry:
+    address: zookeeper://localhost:2181
+  metadata-report:
+    address: zookeeper://localhost:2181
+  application:
+    qosEnable: true
+    qosPort: 22222
+    qosAcceptForeignIp: true
+    qos-enable-compatible: true
+    qos-host-compatible: localhost
+    qos-port-compatible: 22222
+    qos-accept-foreign-ip-compatible: true
+    qos-host: localhost

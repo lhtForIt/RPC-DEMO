@@ -110,7 +110,8 @@ public final class Rpcfx {
                 System.out.println(response.getException());
             }
 
-            return JSON.parse(response.getResult().toString());
+//            return JSON.parse(response.getResult().toString());
+            return JSON.parse(JSON.toJSONString(response));
         }
 
         private RpcfxResponse post(RpcfxRequest req, String url) throws Exception {
@@ -127,11 +128,15 @@ public final class Rpcfx {
 //            String respJson = client.newCall(request).execute().body().string();
 
             NettyHttpClient client = new NettyHttpClient();
-            client.connect("127.0.0.1", 8080);
+            client.connect("127.0.0.1", 8080, reqJson);
             String respJson = "";
 
             System.out.println("resp json: "+respJson);
             return JSON.parseObject(respJson, RpcfxResponse.class);
+        }
+
+        private RpcfxResponse getResponse(){
+            return null;
         }
     }
 }

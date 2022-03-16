@@ -45,6 +45,7 @@ public class ProxyFactory {
                  * 在调用代理对象的方法时，会执行这里的内容
                  */
                 Object result = null;
+                RpcfxResponse response = null;
                 try {
                     if (beforeAdvice != null) {
                         beforeAdvice.before();
@@ -55,13 +56,15 @@ public class ProxyFactory {
                     if (afterAdvice != null) {
                         afterAdvice.after();
                     }
-                    RpcfxResponse response = JSON.parseObject(String.valueOf(result), RpcfxResponse.class);
+                    response = JSON.parseObject(JSON.toJSONString(result), RpcfxResponse.class);
                     if (!response.isStatus()) {
                         throwAdvice.afterThrowing();
                     }
                 } catch (Exception e) {
                     throwAdvice.afterThrowing();
                 } catch (Throwable throwable) {
+                }finally {
+                    result = JSON.parse(response.getResult().toString());
                 }
 
                 //返回目标对象的返回值

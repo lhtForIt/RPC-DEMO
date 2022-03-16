@@ -30,4 +30,9 @@ public class HttpClientOutboundHandler extends ChannelInboundHandlerAdapter {
         }
 
     }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+
+    }
 }

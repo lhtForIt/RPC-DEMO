@@ -29,7 +29,6 @@ public class RpcfxClientApplication {
 		// UserService service = new xxx();
 		// service.findById
 
-//		AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(ExceptionAop.class);
 		UserService userService = Rpcfx.create(UserService.class, "http://localhost:8080/");
 		User user = userService.findById(1);
 		System.out.println("find user id=1 from server: " + user.getName());
